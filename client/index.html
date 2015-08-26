@@ -3,8 +3,28 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <script>
+        var trm = 22323;
+        var socket = new WebSocket("ws://localhost:3001?id="+trm);
+        socket.onopen = function() {
+            document.getElementById('socket').innerHTML += "Connection opened";
+            socket.send('message from'+trm);
+        };
+
+        socket.onclose = function(event) {
+            document.getElementById('socket').innerHTML += "\nConnection closed";
+        };
+
+        socket.onmessage = function(event) {
+            document.getElementById('socket').innerHTML += "\nRecieved data: "+ event.data;
+        };
+
+        socket.onerror = function(error) {
+            document.getElementById('socket').innerHTML += "\Error";
+        };
+    </script>
 </head>
 <body>
-
+    <div id="socket" style="white-space: pre-wrap"/>
 </body>
 </html>

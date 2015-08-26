@@ -1,0 +1,15 @@
+{
+	"port": {
+		"server": 3001
+	},
+	"api": {
+		"version": 2
+	},
+	"path": {
+        "trm_logs": "./logs/",
+		"logs": {
+			"all": "./logs/all.log",
+			"errors": "./logs/errors.log"
+		}
+	}
+}
