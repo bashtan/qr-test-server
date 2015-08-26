@@ -9,10 +9,8 @@ class Core extends Dispatcher {
 		this.INITED = 'inited';
 	}
 
-
-
 	start() {
-		logger.info('Core started');
+		logger.save('all', 'Core started');
 		this.emit(this.INITED);
 	}
 

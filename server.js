@@ -9,7 +9,6 @@ class Server {
 	}
 
 	_register(id, ws) {
-		logger.log('Terminal ' + id + ' registered');
 		this._clients[id] = { ws: ws };
 		ws.on('close', () =>  {
 			this._unregister(id);
@@ -26,22 +25,21 @@ class Server {
 
 	_unregister(id) {
 		if(!this._clients[id]) return logger.log('No such connection');
-		logger.log('Terminal ' + id + ' unregistered');
+		logger.save('terminal', id + ' disconnected');
 		delete this._clients[id];
 	}
 
 	start() {
-		logger.info('Server started');
-		logger.save('terminal', "asdasd");
+		logger.save('all', 'Server started');
+
 		webSocketServer.on('connection', ws=> {
 			var location = url.parse(ws.upgradeReq.url, true);
 			var id = location.query.id ? location.query.id :Math.random();
+			logger.save('terminal', id + ' connected');
 			this._register(id, ws);
 		});
 	}
 	stop() {
-
-
 	}
 }
 
