@@ -36,7 +36,7 @@ class Server {
 			var id = Math.random();
 			try{
 				var location = url.parse(ws.upgradeReq.url, true);
-				id = location.query.id;
+				id = location.query.id? location.query.id:Math.random();
 			}catch(e){
 				id = Math.random();
 			}
