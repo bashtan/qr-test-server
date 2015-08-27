@@ -33,8 +33,14 @@ class Server {
 		logger.save('all', 'Server started');
 
 		webSocketServer.on('connection', ws=> {
-			var location = url.parse(ws.upgradeReq.url, true);
-			var id = location.query.id ? location.query.id :Math.random();
+			var id = Math.random();
+			try{
+				var location = url.parse(ws.upgradeReq.url, true);
+				id = location.query.id;
+			}catch(e){
+				id = Math.random();
+			}
+
 			logger.save('terminal', id + ' connected');
 			this._register(id, ws);
 		});
