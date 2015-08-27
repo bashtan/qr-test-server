@@ -5,7 +5,7 @@
     <title></title>
     <script>
         var trm = 22323;
-        var socket = new WebSocket("ws://localhost:3001");
+        var socket = new WebSocket("ws://localhost:3001?id="+trm);
         socket.onopen = function() {
             document.getElementById('socket').innerHTML += "Connection opened";
             socket.send('message from'+trm);
