@@ -32,7 +32,7 @@ class Server {
 
 	start() {
 		logger.save('all', 'Server started');
-		dblogger.start();
+		//dblogger.start();
 
 		webSocketServer.on('connection', ws=> {
 			var cl_id = Math.random();

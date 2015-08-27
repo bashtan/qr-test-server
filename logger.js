@@ -13,7 +13,7 @@ var logger = {
 	error:		debug('error'),
 	file:		debug('file'),
 	save:		(level, ...params) => {
-		if(level == 'db') return dblogger.log(params[0]);
+		//if(level == 'db') return dblogger.log(params[0]);
 
 		logger.info(params);
 		if(!fs.existsSync(config.path.trm_logs)) fs.mkdirSync(config.path.trm_logs);
