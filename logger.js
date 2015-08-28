@@ -2,7 +2,6 @@ var config	= require('config');
 var debug	= require('debug');
 var fs		= require('fs');
 var utils	= require('utils');
-var dblogger	= require('dblogger');
 
 var levels = {};
 
@@ -13,7 +12,6 @@ var logger = {
 	error:		debug('error'),
 	file:		debug('file'),
 	save:		(level, ...params) => {
-		//if(level == 'db') return dblogger.log(params[0]);
 
 		logger.info(params);
 		if(!fs.existsSync(config.path.trm_logs)) fs.mkdirSync(config.path.trm_logs);

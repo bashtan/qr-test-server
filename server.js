@@ -1,6 +1,5 @@
 var logger			= require('logger');
 var WebSocketServer = new require('ws');
-var dblogger = new require('dblogger');
 var webSocketServer = new WebSocketServer.Server({port: 3001});
 var url = require('url');
 
@@ -32,7 +31,6 @@ class Server {
 
 	start() {
 		logger.save('all', 'Server started');
-		//dblogger.start();
 
 		webSocketServer.on('connection', ws=> {
 			var cl_id = Math.random();
