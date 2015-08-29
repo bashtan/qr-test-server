@@ -9,10 +9,13 @@ class Server {
 	}
 
 	_register(id, cl_id, ws, start_date) {
+		logger.save('db', {cl_id:cl_id, id:id, type:'open',start_date: start_date});
+
 		this._clients[cl_id] = { ws: ws };
 		this._clients[cl_id].start_date = start_date;
-		ws.on('close', () =>  this._unregister(cl_id, id));
 
+		ws.on('close', () =>  this._unregister(cl_id, id));
+		ws.on('error', () =>  this._unregister(cl_id, id));
 		ws.on('message', event => {
 			try{
 				if(event == 'end') logger.save('db', {cl_id:cl_id,id:id, type:'message'});
@@ -32,6 +35,8 @@ class Server {
 	start() {
 		logger.save('all', 'Server started');
 
+
+		webSocketServer.on('error', ws=> {});
 		webSocketServer.on('connection', ws=> {
 			var cl_id = Math.random();
 			var id = Math.random();
@@ -41,7 +46,6 @@ class Server {
 			}catch(e){
 				id = Math.random();
 			}
-			logger.save('db', {cl_id: cl_id, id:id, type:'start'});
 			this._register(id, cl_id, ws, new Date());
 		});
 	}
