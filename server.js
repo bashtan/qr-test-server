@@ -1,4 +1,4 @@
-var logger			= require('logger');
+var logger	= require('logger');
 var express = require('express');
 var app = express();
 var url = require('url');
@@ -30,8 +30,6 @@ class Server {
 
 	_sendMess(cl){
 		var msg = Math.random();
-		console.log('cl.req='+cl);
-		console.log('cl.req='+cl.req);
 		cl.res.write("data: "+ msg + "\n\n");
 	}
 
@@ -58,15 +56,12 @@ class Server {
 			res.send(template);  // <- Return the static template above
 		});
 
-
 		app.get('/events/', (req, res) => {
 			var cl_id = Math.random();
 			var id = Math.random();
 			this._register(id, cl_id, req, res, new Date());
-
-
 		});
-		app.listen(8080);
+		app.listen(3001);
 	}
 	stop() {
 	}
