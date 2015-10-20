@@ -4,28 +4,24 @@
     <meta charset="UTF-8">
     <title></title>
     <script>
-        var source = new EventSource("http://localhost:8080/events/");
-        source.onmessage = function(e) {
-		        document.body.innerHTML += e.data + "<br>";
+        var trm = 22323;
+        var socket = new WebSocket("ws://localhost:3001?id="+trm);
+        socket.onopen = function() {
+            document.getElementById('socket').innerHTML += "Connection opened";
+            socket.send('message from'+trm);
         };
-//        var trm = 22323;
-//        var socket = new WebSocket("ws://websocket-test.qiwi.com:3001?id="+trm);
-//        socket.onopen = function() {
-//            document.getElementById('socket').innerHTML += "Connection opened";
-//            socket.send('message from'+trm);
-//        };
-//
-//        socket.onclose = function(event) {
-//            document.getElementById('socket').innerHTML += "\nConnection closed";
-//        };
-//
-//        socket.onmessage = function(event) {
-//            document.getElementById('socket').innerHTML += "\nRecieved data: "+ event.data;
-//        };
-//
-//        socket.onerror = function(error) {
-//            document.getElementById('socket').innerHTML += "\Error";
-//        };
+
+        socket.onclose = function(event) {
+            document.getElementById('socket').innerHTML += "\nConnection closed";
+        };
+
+        socket.onmessage = function(event) {
+            document.getElementById('socket').innerHTML += "\nRecieved data: "+ event.data;
+        };
+
+        socket.onerror = function(error) {
+            document.getElementById('socket').innerHTML += "\Error";
+        };
     </script>
 </head>
 <body>
